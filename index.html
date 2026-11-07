@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse — Clima, câmbio e cripto ao vivo</title>
+    <meta name="description" content="Dashboard em tempo real com previsão do tempo, cotação do dólar e criptomoedas." />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 17h6l3-8 5 15 3-7h7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Pulse
+      </div>
+
+      <div class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="city-input" type="search" placeholder="Buscar cidade…" autocomplete="off" aria-label="Buscar cidade" />
+        <button id="geo-btn" title="Usar minha localização" aria-label="Usar minha localização">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <ul id="city-results" class="results" role="listbox" hidden></ul>
+      </div>
+
+      <div class="live" id="live">
+        <span class="dot"></span>
+        <span id="live-text">Conectando…</span>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- ─────────────── Clima ─────────────── -->
+      <section class="card hero" id="hero" data-sky="clear-day">
+        <div class="hero-top">
+          <div>
+            <h1 id="city-name">—</h1>
+            <p id="city-time" class="muted">Carregando…</p>
+          </div>
+          <div id="hero-icon"></div>
+        </div>
+        <div class="hero-main">
+          <div id="hero-temp" class="big-temp">—</div>
+          <div>
+            <p id="hero-label" class="hero-label"></p>
+            <p id="hero-sub" class="muted"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card details" id="details">
+        <h2>Agora</h2>
+        <div class="tiles" id="details-tiles"></div>
+      </section>
+
+      <section class="card hourly">
+        <div class="card-head">
+          <h2>Próximas 24 horas</h2>
+          <div class="legend"><span class="lg lg-temp"></span>Temperatura <span class="lg lg-rain"></span>Chance de chuva</div>
+        </div>
+        <div class="chart-box"><canvas id="hourly-chart"></canvas></div>
+      </section>
+
+      <section class="card week">
+        <h2>7 dias</h2>
+        <ul id="week-list" class="week-list"></ul>
+      </section>
+
+      <!-- ─────────────── Mercado ─────────────── -->
+      <h2 class="section-title">Mercado</h2>
+
+      <section class="card fx" id="fx"></section>
+
+      <section class="card coins">
+        <div class="card-head">
+          <h2>Top criptomoedas</h2>
+          <span class="muted small">em reais · 7d</span>
+        </div>
+        <ul id="coin-list" class="coin-list"></ul>
+      </section>
+
+      <section class="card coin-detail">
+        <div class="card-head">
+          <div class="coin-title" id="coin-title"></div>
+          <div class="seg" id="range">
+            <button data-days="1">24h</button>
+            <button data-days="7" class="on">7d</button>
+            <button data-days="30">30d</button>
+            <button data-days="90">90d</button>
+          </div>
+        </div>
+        <div class="chart-box tall"><canvas id="coin-chart"></canvas></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Dados: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> ·
+      <a href="https://www.coingecko.com/" target="_blank" rel="noopener">CoinGecko</a> ·
+      <a href="https://docs.awesomeapi.com.br/" target="_blank" rel="noopener">AwesomeAPI</a>
+      — feito por <a href="https://github.com/thiagoalves0707" target="_blank" rel="noopener">Thiago Alves</a>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
